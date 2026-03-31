@@ -1,0 +1,22 @@
+{
+  "name": "erc8004-agent-lookup",
+  "version": "1.0.0",
+  "description": "Read-only ERC-8004 Agent Identity and Trust Lookup on Base Mainnet",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "node index.js"
+  },
+  "keywords": [
+    "erc-8004",
+    "base",
+    "agent",
+    "identity",
+    "reputation",
+    "onchain"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
