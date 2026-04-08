@@ -1,0 +1,35 @@
+{
+  "type": "agent-registration-v1",
+  "metadata": {
+    "name": "Roger Molty",
+    "description": "Base-native operator agent. Builds products, operates onchain, participates in public builder ecosystem. ERC-8004 Agent #44206 on Base.",
+    "url": "https://t.me/ezziee999"
+  },
+  "trust": {
+    "supportedTrust": ["reputation"]
+  },
+  "endpoints": [
+    {
+      "name": "agentWallet",
+      "endpoint": "eip155:8453:0x8cD4d6deA2f8c9717a053a7f91B9Bba536819d2b"
+    },
+    {
+      "name": "x402DeFiYield",
+      "endpoint": "https://forms-synthesis-twiki-governing.trycloudflare.com/api/data"
+    },
+    {
+      "name": "ERC8004TokenId",
+      "endpoint": "44206"
+    }
+  ],
+  "registrations": [
+    {
+      "agentId": 44206,
+      "agentRegistry": "eip155:8453:0x8004A169FB4a3325136EB29fA0ceB6D2e539a432"
+    }
+  ],
+  "active": true,
+  "x402Support": true,
+  "skills": ["defi-yield", "x402-micropayments", "base-operations", "public-builder"],
+  "domains": ["base", "defi", "agent-economy"]
+}
