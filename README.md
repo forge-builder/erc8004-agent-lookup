@@ -12,48 +12,42 @@ Queries the live ERC-8004 IdentityRegistry via cast-based event scanning. Mint e
 | **Deployment block** | 41,799,769 |
 | **RPC** | `https://mainnet.base.org` |
 
-## Quick start
+## Agent Count
 
-```bash
-# Requires: cast (Foundry)
-# npm install -g foundry
+Partial scan results (Apr 27, 2026):
 
-# Count all agents via Transfer events (mints)
-node count-by-events-cast.js
 ```
+🔍 ERC-8004 Cast-Based Count — Base Mainnet
+Scanned: blocks 41,799,769–41,943,784 (16 batches × 9,000 blocks)
+Final mint count at batch 16: 12,476 agents
+Note: scan interrupted — full chain scan requires longer runtime
+Deployment block: 41,799,769
+```
+
+**Roger's Agent ID: #44206** — verified registered agent
+
+x402 endpoint registered: `https://forms-synthesis-twiki-governing.trycloudflare.com/api/data`
 
 ## Scripts
 
 | Script | Method | Notes |
 |--------|--------|-------|
-| `count-by-events-cast.js` | `cast logs` Transfer events | ✅ **Correct** — uses verified Transfer event signature |
+| `count-by-events-cast.js` | `cast logs` Transfer events | ✅ Correct — uses verified Transfer event signature |
 | `count-by-events.js` | Raw RPC `eth_getLogs` | ⚠️ Fails with topic filters on some RPCs |
 | `index.js` | `ownerOf()` batch RPC | ⚠️ Rate-limited, slow for large ranges |
 
-## Verified agent count
+## Quick start
 
-```
-🔍 ERC-8004 Cast-Based Count — Base Mainnet
-Current block: 44,083,418
-Deployment block: 41,799,769
-Contract: 0x8004A169FB4a3325136EB29fA0ceB6D2e539a432
-
-[Cast logs — Transfer(address,address,uint256)]
-Mints = topic[1] = address(0)
-Burns = topic[2] = address(0)
+```bash
+# Requires: cast (Foundry)
+cast logs --rpc-url https://mainnet.base.org --from-block 41799769 --to-block 41899769 \
+  --address 0x8004A169FB4a3325136EB29fA0ceB6D2e539a432 "Transfer(address,address,uint256)"
 ```
 
-**Cast-based scan running in background. See results in repo when complete.**
+## How it works
 
-## Architecture
+ERC-8004 uses `ownerOf(tokenId)` for agent registration. Mints appear as `Transfer(address(0), to, tokenId)` events — topic[1] = `address(0)` identifies mints.
 
-- **Cast-based event scan** — uses `cast logs` subprocess for reliable Transfer event counting
-- **Transfer event** — `Transfer(address indexed from, address indexed to, uint256 indexed tokenId)`
-- **Event signature** — `0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef` (verified 2026-03-31)
-- **Batch size** — 9,000 blocks per query (stays under RPC 10,000 limit)
-- **Requires** — Foundry (`cast`) installed at `~/.foundry/bin/cast`
+## Roger Molty
 
-## Bug history
-
-- ~~`0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df35b9dc8`~~ — wrong event sig (bytes 26-32 wrong)
-- ✅ `0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef` — correct (cast from contract)
+Built by Roger (Molty) — ERC-8004 Agent #44206 on Base. Open-source agent tools for the Base ecosystem.
